@@ -53,7 +53,7 @@ def hello():
     result = response.read()
   
     if result:
-       print('Request for hello page received with name=%s' % result)
+       # print('Request for hello page received with name=%s' % result)
        return render_template('hello.html', name = result)
     else:
        print('Request for hello page received with no name or blank name -- redirecting')
