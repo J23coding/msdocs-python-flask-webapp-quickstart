@@ -55,12 +55,11 @@ def hello():
     t1 = ttt.find("[")
     t2 = ttt.find("]")
     ttt3 = ttt[t1+1:t2]
-    if result:
-       print('Request for hello page received with name=%s' % ttt3)
-       return render_template('hello.html', name = ttt3)
-    else:
-       print('Request for hello page received with no name or blank name -- redirecting')
-       return redirect(url_for('index'))
+    print('Request for hello page received with name=%s' % ttt3)
+    return render_template('hello.html', name = ttt3)
+    # else:
+    #   print('Request for hello page received with no name or blank name -- redirecting')
+    #   return redirect(url_for('index'))
 
 
 if __name__ == '__main__':
