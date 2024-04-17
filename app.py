@@ -21,51 +21,43 @@ def favicon():
 
 @app.route('/hello', methods=['POST'])
 def hello():
-   temp = request.form.get('temp')
-
-temp = int(temp)/100
-
-data =   {
-   "Inputs": { 
-     "data": [
-       {
-         "day": 13,
-         "mnth": 3,   
-         "year": 2023,
-         "season": 1,
-         "holiday": 0,
-         "weekday": 0,
-         "workingday": 1,
-         "weathersit": 6, 
-         "temp": temp, 
-         "atemp": 0.1,
-         "hum": 0.5,
-         "windspeed": 0.3
-       }
-     ]    
-   },   
-   "GlobalParameters": 1.0
- }
-
-body = str.encode(json.dumps(data))
-
-url = 'http://54dabd99-b27c-4ffd-9394-e2ababbf499c.australiasoutheast.azurecontainer.io/score'
-# Replace this with the primary/secondary key or AMLToken for the endpoint
-api_key = 'e6H0YTbuQdcVxzBvMebO35YpS9bZJaSx'
-
-headers = {'Content-Type':'application/json', 'Authorization':('Bearer '+ api_key)}
-
-req = urllib.request.Request(url, body, headers)
-
-response = urllib.request.urlopen(req)
-result = response.read()
+  temp = request.form.get('temp')
+  temp = int(temp)/100
+  data =   {
+     "Inputs": { 
+       "data": [
+          {
+           "day": 13,
+           "mnth": 3,   
+           "year": 2023,
+           "season": 1,
+           "holiday": 0,
+           "weekday": 0,
+           "workingday": 1,
+           "weathersit": 6, 
+           "temp": temp, 
+           "atemp": 0.1,
+           "hum": 0.5,
+           "windspeed": 0.3
+           }
+          ]    
+         },   
+       "GlobalParameters": 1.0
+      }
+    body = str.encode(json.dumps(data)
+    url = 'http://54dabd99-b27c-4ffd-9394-e2ababbf499c.australiasoutheast.azurecontainer.io/score'
+    api_key = 'e6H0YTbuQdcVxzBvMebO35YpS9bZJaSx'
+    headers = {'Content-Type':'application/json', 'Authorization':('Bearer '+ api_key)}
+    req = urllib.request.Request(url, body, headers)
+    response = urllib.request.urlopen(req)
+    result = response.read()
   
-if result:
-   print('Request for hello page received with name=%s' % result)
-   return render_template('hello.html', name = result)
-else:
-   print('Request for hello page received with no name or blank name -- redirecting')
-   return redirect(url_for('index'))
+    if result:
+       print('Request for hello page received with name=%s' % result)
+       return render_template('hello.html', name = result)
+    else:
+       print('Request for hello page received with no name or blank name -- redirecting')
+       return redirect(url_for('index'))
 
 
 if __name__ == '__main__':
